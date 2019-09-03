@@ -22,7 +22,7 @@ pipeline{
         stage("Copying War to ubuntu Slave"){
             steps{
                 echo "Deploying War file"
-                sh "scp -i /home/ubuntu/Aadithya.pem **/target/*.war ubuntu@${params.ubuntu_slave}:/home/ubuntu/apache-tomcat-8.5.45/webapps"
+                sh "scp -i /home/ubuntu/Aadithya.pem -o StrictHostKeyChecking=no **/target/*.war ubuntu@${params.ubuntu_slave}:/home/ubuntu/apache-tomcat-8.5.45/webapps"
 
             }
         }
