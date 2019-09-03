@@ -1,21 +1,24 @@
 pipeline{
     agent any
     stages{
-        stage("A"){
+        stage("Building War File"){
             steps{
                 echo "Building the war file"
                 sh "mvn clean install"
             }
             post{
-                always{
-                    echo "========always========"
-                }
                 success{
                     echo "========A executed successfully========"
                 }
                 failure{
                     echo "========A execution failed========"
                 }
+            }
+        }
+        stage("Deploying to Tomcat WebApplication Server"){
+            steps{
+                echo "Deploying War file"
+                sh "sudo cp **/target/*.war /home/ubuntu/apache-tomcat-8.5.45/webapps"
             }
         }
     }
