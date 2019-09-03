@@ -8,9 +8,8 @@ pipeline{
             }
             post{
                 success{
-                    echo "Archive Artifatcs"
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
+                    echo "Build Successfull Harish"
+                    }
                 failure{
                     echo "========A execution failed========"
                 }
@@ -19,7 +18,7 @@ pipeline{
         stage("Deploying to Tomcat WebApplication Server"){
             steps{
                 echo "Deploying War file"
-                sh "sudo cp **/target/*.war /home/ubuntu/apache-tomcat-8.5.45/webapps"
+                sh "sudo cp /var/lib/jenkins/workspace/Pipeline/target/vprofile-v1.war /home/ubuntu/apache-tomcat-8.5.45/webapps"
             }
         }
     }
