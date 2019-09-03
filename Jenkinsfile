@@ -8,7 +8,8 @@ pipeline{
             }
             post{
                 success{
-                    echo "========A executed successfully========"
+                    echo "Archive Artifatcs"
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
                 failure{
                     echo "========A execution failed========"
