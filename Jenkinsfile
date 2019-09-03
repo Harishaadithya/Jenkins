@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    parameters{
+        string(name: 'ubuntu_slave' , defaultValue: '18.220.76.185' , description: 'ubuntu_tomcat')
+    }
     stages{
         stage("Building War File"){
             steps{
@@ -16,9 +19,11 @@ pipeline{
                 }
             }
         }
-        stage("Deploying to Tomcat WebApplication Server"){
+        stage("Copying War to ubuntu Slave"){
             steps{
                 echo "Deploying War file"
+                sh "scp -i /home/ubuntu/Aadithya.pem **/target/*.war ubuntu@${params.ubuntu_slave}:/home/ubuntu/apache-tomcat-8.5.45/webapps"
+
             }
         }
     }
